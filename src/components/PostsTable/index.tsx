@@ -1,11 +1,19 @@
 import {Pencil, Trash} from "phosphor-react";
 import {usePosts} from "../../context/ApiContext/usePosts";
-import {Container, Content, Icons, Title} from "./styles";
+import {
+    Container,
+    Content,
+    DateAgo,
+    Icons,
+    Title,
+    Username
+} from "./styles";
 import {useState, useEffect} from "react";
 import {EditPostModal} from "../EditPostModal";
 import {DeletePostModal} from "../DeletePostModal";
 import {Post} from '../../services/api';
 import {Pagination} from "../Pagination";
+import {format, formatDistanceToNow} from "date-fns";
 
 interface PostsTableProps {
     isOpen?: boolean;
@@ -69,16 +77,26 @@ export function PostsTable({
             <Container key={post.id}>
                 <Title>
                     <p>{post.title}</p>
-                    <Icons>
-                        <Trash
-                            style={{
-                            marginRight: "7px"
-                        }}
-                            onClick={() => handleOpenDeletePostModal(post)}/>
-                        <Pencil onClick={() => handleOpenEditPostModal(post)}/>
-                    </Icons>
+                    {post.username === "usuário_teste" && (
+                        <Icons>
+                            <Trash
+                                style={{
+                                marginRight: "7px"
+                            }}
+                                onClick={() => handleOpenDeletePostModal(post)}/>
+                            <Pencil onClick={() => handleOpenEditPostModal(post)}/>
+                        </Icons>
+                    )}
                 </Title>
-                <Content>{post.content}</Content>
+                <Content>
+                    <Username>
+                        <h4>@{post.username}</h4>
+                        <DateAgo>
+                            {formatDistanceToNow(new Date(post.created_datetime), {addSuffix: true})}
+                        </DateAgo>
+                    </Username>
+                    <p>{post.content}</p>
+                </Content>
             </Container>
         ))
     } < Pagination currentPage = {
