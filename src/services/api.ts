@@ -10,6 +10,7 @@ export interface Post {
 
 export interface PostResponse {
     results : Post[];
+    next?: string;
 }
 
 const apiUrl = 'https://dev.codeleap.co.uk/careers/';
@@ -21,10 +22,15 @@ const createApi = () => {
 
 export {createApi};
 
-async function getAllPosts() : Promise < Post[] > {
-    const response: AxiosResponse < PostResponse > = await axios.get(apiUrl);
+async function getAllPosts(limit: number = 10, offset: number = 0): Promise<Post[]> {
+    const response: AxiosResponse<PostResponse> = await axios.get(`${apiUrl}?limit=${limit}&offset=${offset}`);
+    if (response.data.next) {
+        const nextOffset = new URL(response.data.next).searchParams.get('offset');
+        const nextPage = await getAllPosts(limit, parseInt(nextOffset || "0"));
+      response.data.results.push(...nextPage);
+    }
     return response.data.results;
-}
+  }
 
 async function createPost(username : string, title : string, content : string) : Promise < Post > {
     const postData = {
