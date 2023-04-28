@@ -2,6 +2,8 @@
 
 CodeLeap Network is a social network built with React.js and TypeScript, that allows users to share, edit and delete their posts. The frontend consumes data from the [API](https://dev.codeleap.co.uk/careers/) provided by CodeLeap, and the project's design was based on a [Figma file](https://www.figma.com/file/0OQWLQmU14SF2cDhHPJ2sx/CodeLeap-Engineering-Test?type=design&node-id=0-1&t=LlJ4j4pkg4zBGJyY-0).
 
+## [Link](https://code-leap-network-chi.vercel.app/)
+
 ## Features
 Post creation, delete and editing
 Post feed with pagination
