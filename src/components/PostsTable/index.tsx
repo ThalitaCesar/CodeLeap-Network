@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { EditPostModal } from "../EditPostModal";
 import { DeletePostModal } from "../DeletePostModal";
 import { Post } from '../../services/api';
+import { Pagination } from "../Pagination";
 
 interface PostsTableProps {
   isOpen?: boolean;
@@ -15,6 +16,8 @@ export function PostsTable({ isOpen = true }: PostsTableProps) {
   const [isDeletePostModalOpen, setIsDeletePostModalOpen] = useState(false);
   const [postSelected, setPostSelected] = useState<Post | undefined>();
   const [posts, setPosts] = useState<Post[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const POSTS_PER_PAGE = 10;
 
   const {getAllPosts} = usePosts()
 
@@ -25,8 +28,6 @@ export function PostsTable({ isOpen = true }: PostsTableProps) {
     }
     fetchAllPosts();
   }, [posts]);
-
-
 
   function handleOpenEditPostModal(post: Post) {
     setPostSelected(post);
@@ -46,9 +47,17 @@ export function PostsTable({ isOpen = true }: PostsTableProps) {
     setIsDeletePostModalOpen(false);
   }
 
+    const getCurrentPosts = () => {
+      const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+      const endIndex = startIndex + POSTS_PER_PAGE;
+      return posts.slice(startIndex, endIndex);
+    };
+
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+
   return (
     <>
-      {isOpen && posts?.map(post => (
+      {isOpen && getCurrentPosts().map(post => (
         <Container key={post.id}>
           <Title>
             <p>{post.title}</p>
@@ -64,6 +73,8 @@ export function PostsTable({ isOpen = true }: PostsTableProps) {
           <Content>{post.content}</Content>
         </Container>
       ))}
+      <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
+
 
       {isEditPostModalOpen && postSelected && (
         <EditPostModal
