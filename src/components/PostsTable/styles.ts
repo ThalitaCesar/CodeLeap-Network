@@ -31,9 +31,24 @@ justify-content:space-between;
 
 export const Content = styled.div`
 padding: 2rem 2rem;
+h4{
+    color: var(--light-blue);
+    margin-bottom: 7px;
+}
 `
 
 export const Icons = styled.div`
 display:flex;
 cursor:pointer;
+`
+
+export const DateAgo = styled.p`
+font-size: 12px;
+`
+
+export const Username= styled.div`
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:30px;
 `
