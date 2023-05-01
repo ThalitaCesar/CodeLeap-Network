@@ -12,7 +12,7 @@ export const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: ${({ disabled }: { disabled: boolean }) =>
     disabled ? "#1E90FF" : "#E1E1E6"};
 

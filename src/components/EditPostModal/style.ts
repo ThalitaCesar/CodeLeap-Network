@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.form `
   background: var(--grey);
-
+  padding: 1rem 1rem;
+  
   h2 {
     margin-bottom: 2rem;
     margin-top: 3rem;
     font-size: 1.5rem;
     color: var(--background);
   }
-
   input {
     padding: 0 1.5rem;
     width: 100%;
@@ -43,8 +43,8 @@ export const Container = styled.form `
       color: var(--text-body);
     }
   }
-
-  button[type='submit'] {
+  
+  button[type="submit"] {
     margin-top: 1.5rem;
     padding: 0 1.5rem;
     width: 100%;
@@ -56,18 +56,29 @@ export const Container = styled.form `
     border: 0;
     border-radius: 0.25rem;
     transition: filter 0.2s ease-in-out;
-
+    
     &:hover {
       filter: brightness(0.9);
     }
   }
 
   @media (min-width: 768px) {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
-
+  
   @media (min-width: 1024px) {
     max-width: 800px;
   }
+  
+  @media (min-width: 1200px) {
+    max-width: 1120px;
+  }
 `;
+
+
+
+
+  
+
+  
