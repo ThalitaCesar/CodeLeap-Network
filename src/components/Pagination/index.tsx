@@ -17,14 +17,12 @@ export const Pagination : React.FC < PaginationProps > = ({currentPage, totalPag
             <Button onClick={() => onChange(currentPage - 1)} disabled={currentPage === 1}>
                 {"<"}
             </Button>
-            {pages.map((page) => (
                 <Button
-                    key={page}
-                    onClick={() => onChange(page)}
-                    disabled={page === currentPage}>
-                    {page}
+                    key={currentPage}
+                    onClick={() => onChange(currentPage)}
+                    disabled={currentPage === currentPage}>
+                    {currentPage}
                 </Button>
-            ))}
             <Button
                 onClick={() => onChange(currentPage + 1)}
                 disabled={currentPage === totalPages}>

@@ -44,9 +44,14 @@ export function PostsTable({
         fetchAllPosts();
     }, [posts]);
 
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
     function handleOpenEditPostModal(post : Post) {
         setPostSelected(post);
         setIsEditPostModalOpen(true);
+        scrollToTop();
     }
 
     function handleCloseEditPostModal() {
@@ -56,6 +61,7 @@ export function PostsTable({
     function handleOpenDeletePostModal(post : Post) {
         setPostSelected(post);
         setIsDeletePostModalOpen(true);
+        scrollToTop();
     }
 
     function handleCloseDeletePostModal() {
@@ -84,7 +90,7 @@ export function PostsTable({
                                 marginRight: "7px"
                             }}
                                 onClick={() => handleOpenDeletePostModal(post)}/>
-                            <Pencil onClick={() => handleOpenEditPostModal(post)}/>
+                            <Pencil onClick={() => handleOpenEditPostModal(post)} />
                         </Icons>
                     )}
                 </Title>
